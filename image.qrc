@@ -15,5 +15,7 @@
         <file>Dirt.png</file>
         <file>titleV.2.gif</file>
         <file>desV.3.gif</file>
+        <file>Game Over.jpg</file>
+        <file>You-Win.jpg</file>
     </qresource>
 </RCC>

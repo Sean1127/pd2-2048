@@ -12,22 +12,256 @@ MainWindow::MainWindow(QWidget *parent) :
     palette.setBrush(QPalette::Background, bgp);
     this->setPalette(palette);
     setboardp(ui->A1,ui->A2,ui->A3,ui->A4,ui->B1,ui->B2,ui->B3,ui->B4,ui->C1,ui->C2,ui->C3,ui->C4,ui->D1,ui->D2,ui->D3,ui->D4);
+    score = 0;
+}
+int MainWindow::best = 0;
+
+void MainWindow::ActionRight(int (&board)[4][4])
+{
+    if (end() == false && win() == false)
+    {
+    // move every to the rightest
+    int i, j;
+    for (j = 0; j < 4; j++)
+    {
+        for (i = 2; i >= 0; i--)
+        {
+            if (checkEmpty(i,j) == false)
+            {
+                while (checkEmpty(i + 1,j) == true && i != 3)
+                {
+                    setboard(i + 1,j,board[j][i]);
+                    setboard(i,j,0);
+                    i++;
+                }
+            }
+        }
+    }
+
+    // combine number
+    for (j = 0; j < 4; j++)
+    {
+        for (i = 3; i > 0; i--)
+        {
+            if (checkEmpty(i,j) == false && board[j][i] == board[j][i - 1])
+            {
+                setboard(i,j,2*board[j][i]);
+                setboard(i - 1,j,0);
+                score += board[j][i];
+                if (best < score)
+                    best = score;
+            }
+        }
+    }
+
+    // move again
+    for (j = 0; j < 4; j++)
+    {
+        for (i = 2; i >= 0; i--)
+        {
+            if (checkEmpty(i,j) == false)
+            {
+                while (checkEmpty(i + 1,j) == true && i != 3)
+                {
+                    setboard(i + 1,j,board[j][i]);
+                    setboard(i,j,0);
+                    i++;
+                }
+            }
+        }
+    }
+
+    // create new number
+    int temp = pickRandPlace();
+    setboard(temp%4, temp/4, mergeRandNum());
+    setImage(boardp);
+    }
 }
 
-int MainWindow::ActionRight(int (&board)[4][4])
+void MainWindow::ActionLeft(int (&board)[4][4])
 {
+    if (end() == false && win() == false)
+    {
+    // move every to the leftest
+    int i, j;
+    for (j = 0; j < 4; j++)
+    {
+        for (i = 1; i < 4; i++)
+        {
+            if (checkEmpty(i,j) == false)
+            {
+                while (checkEmpty(i - 1,j) == true && i != 0)
+                {
+                    setboard(i - 1,j,board[j][i]);
+                    setboard(i,j,0);
+                    i--;
+                }
+            }
+        }
+    }
+
+    // combine number
+    for (j = 0; j < 4; j++)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            if (checkEmpty(i,j) == false && board[j][i] == board[j][i + 1])
+            {
+                setboard(i,j,2*board[j][i]);
+                setboard(i + 1,j,0);
+                score += board[j][i];
+                if (best < score)
+                    best = score;
+            }
+        }
+    }
+
+    // move again
+    for (j = 0; j < 4; j++)
+    {
+        for (i = 1; i < 4; i++)
+        {
+            if (checkEmpty(i,j) == false)
+            {
+                while (checkEmpty(i - 1,j) == true && i != 0)
+                {
+                    setboard(i - 1,j,board[j][i]);
+                    setboard(i,j,0);
+                    i--;
+                }
+            }
+        }
+    }
+
+    // create new number
+    int temp = pickRandPlace();
+    setboard(temp%4, temp/4, mergeRandNum());
+    setImage(boardp);
+    }
 }
 
-int MainWindow::ActionLeft(int (&board)[4][4])
+void MainWindow::ActionDown(int (&board)[4][4])
 {
+    if (end() == false && win() == false)
+    {
+    // move every to the bottom
+    int i, j;
+    for (j = 0; j < 4; j++)
+    {
+        for (i = 2; i >= 0; i--)
+        {
+            if (checkEmpty(j,i) == false)
+            {
+                while (checkEmpty(j,i + 1) == true && i != 3)
+                {
+                    setboard(j,i + 1,board[i][j]);
+                    setboard(j,i,0);
+                    i++;
+                }
+            }
+        }
+    }
+
+    // combine number
+    for (j = 0; j < 4; j++)
+    {
+        for (i = 3; i > 0; i--)
+        {
+            if (checkEmpty(j,i) == false && board[i][j] == board[i - 1][j])
+            {
+                setboard(j,i,2*board[i][j]);
+                setboard(j,i - 1,0);
+                score += board[i][j];
+                if (best < score)
+                    best = score;
+            }
+        }
+    }
+
+    // move again
+    for (j = 0; j < 4; j++)
+    {
+        for (i = 2; i >= 0; i--)
+        {
+            if (checkEmpty(j,i) == false)
+            {
+                while (checkEmpty(j,i + 1) == true && i != 3)
+                {
+                    setboard(j,i + 1,board[i][j]);
+                    setboard(j,i,0);
+                    i++;
+                }
+            }
+        }
+    }
+
+    // create new number
+    int temp = pickRandPlace();
+    setboard(temp%4, temp/4, mergeRandNum());
+    setImage(boardp);
+    }
 }
 
-int MainWindow::ActionDown(int (&board)[4][4])
+void MainWindow::ActionUp(int (&board)[4][4])
 {
-}
+    if (end() == false && win() == false)
+    {
+    // move every to the top
+    int i, j;
+    for (i = 0; i < 4; i++)
+    {
+        for (j = 1; j < 4; j++)
+        {
+            if (checkEmpty(i,j) == false)
+            {
+                while (checkEmpty(i,j - 1) == true && j != 0)
+                {
+                    setboard(i,j - 1,board[j][i]);
+                    setboard(i,j,0);
+                    j--;
+                }
+            }
+        }
+    }
 
-int MainWindow::ActionUp(int (&board)[4][4])
-{
+    // combine number
+    for (i = 0; i < 4; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            if (checkEmpty(i,j) == false && board[j][i] == board[j + 1][i])
+            {
+                setboard(i,j,2*board[j][i]);
+                setboard(i,j + 1,0);
+                score += board[j][i];
+                if (best < score)
+                    best = score;
+            }
+        }
+    }
+
+    // move again
+    for (i = 0; i < 4; i++)
+    {
+        for (j = 1; j < 4; j++)
+        {
+            if (checkEmpty(i,j) == false)
+            {
+                while (checkEmpty(i,j - 1) == true && j != 0)
+                {
+                    setboard(i,j - 1,board[j][i]);
+                    setboard(i,j,0);
+                    j--;
+                }
+            }
+        }
+    }
+
+    // create new number
+    int temp = pickRandPlace();
+    setboard(temp%4, temp/4, mergeRandNum());
+    setImage(boardp);
+    }
 }
 
 void MainWindow::start()
@@ -41,10 +275,7 @@ void MainWindow::start()
         int i = pickRandPlace();
         setboard(i%4, i/4, mergeRandNum());
     }
-    //while (end() == false)
-    //{
-        setImage(boardp);
-    //}
+    setImage(boardp);
 }
 
 bool MainWindow::end()
@@ -62,7 +293,48 @@ bool MainWindow::end()
     }
 
     // check if no more move
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            // vertical check
+            if (board[i][j] == board[i + 1][j])
+            {
+                return false;
+            }
+        }
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            // horizontal check
+            if (board[i][j] == board[i][j + 1])
+            {
+                return false;
+            }
+        }
+    }
+    // defeated screen
+    ui->gameboard->setPixmap(QPixmap(QString::fromUtf8(":/Game Over.jpg")));
     return true;
+}
+
+bool MainWindow::win()
+{
+    // check 2048 reached
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if (board[i][j] == 2048)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+
 }
 
 void MainWindow::cleanboard()
@@ -79,7 +351,7 @@ void MainWindow::cleanboard()
 
 void MainWindow::setboard(int x, int y, int num)
 {
-    board[x][y] = num;
+    board[y][x] = num;
 }
 
 int MainWindow::mergeRandNum()
@@ -106,6 +378,8 @@ int MainWindow::pickRandPlace()
     while (checkEmpty(x, y) == false)
     {
         temp = rand()%16;
+        x = temp%4;
+        y = temp/4;
     }
     return temp;
 }
@@ -156,11 +430,18 @@ void MainWindow::setImage(QLabel *ptr[4][4])
             }
         }
     }
+    QFont font("System", 32, QFont::Bold);
+    ui->score->setText(QString("SCORE: %1").arg(score));
+    ui->score->setFont(font);
+    ui->score->setStyleSheet("QLabel { background-color : 0; color : white; }");
+    ui->best->setText(QString("BEST: %1").arg(best));
+    ui->best->setFont(font);
+    ui->best->setStyleSheet("QLabel { background-color : 0; color : white; }");
 }
 
 bool MainWindow::checkEmpty(int x, int y)
 {
-    if (board[x][y] == 0)
+    if (board[y][x] == 0)
     {
         return true;
     }
@@ -173,20 +454,20 @@ bool MainWindow::checkEmpty(int x, int y)
 void MainWindow::setboardp(QLabel *A1, QLabel *A2, QLabel *A3, QLabel *A4, QLabel *B1, QLabel *B2, QLabel *B3, QLabel *B4, QLabel *C1, QLabel *C2, QLabel *C3, QLabel *C4, QLabel *D1, QLabel *D2, QLabel *D3, QLabel *D4)
 {
     boardp[0][0] = A1;
-    boardp[1][0] = A2;
-    boardp[2][0] = A3;
-    boardp[3][0] = A4;
-    boardp[0][1] = B1;
+    boardp[0][1] = A2;
+    boardp[0][2] = A3;
+    boardp[0][3] = A4;
+    boardp[1][0] = B1;
     boardp[1][1] = B2;
-    boardp[2][1] = B3;
-    boardp[3][1] = B4;
-    boardp[0][2] = C1;
-    boardp[1][2] = C2;
+    boardp[1][2] = B3;
+    boardp[1][3] = B4;
+    boardp[2][0] = C1;
+    boardp[2][1] = C2;
     boardp[2][2] = C3;
-    boardp[3][2] = C4;
-    boardp[0][3] = D1;
-    boardp[1][3] = D2;
-    boardp[2][3] = D3;
+    boardp[2][3] = C4;
+    boardp[3][0] = D1;
+    boardp[3][1] = D2;
+    boardp[3][2] = D3;
     boardp[3][3] = D4;
 }
 
@@ -198,19 +479,19 @@ MainWindow::~MainWindow()
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     // press arrow key
-    if (event->key() == Qt::Key_Right)
+    if (event->key() == Qt::Key_D)
     {
         ActionRight(board);
     }
-    else if (event->key() == Qt::Key_Left)
+    else if (event->key() == Qt::Key_A)
     {
         ActionLeft(board);
     }
-    else if (event->key() == Qt::Key_Down)
+    else if (event->key() == Qt::Key_S)
     {
         ActionDown(board);
     }
-    else if (event->key() == Qt::Key_Up)
+    else if (event->key() == Qt::Key_W)
     {
         ActionUp(board);
     }
