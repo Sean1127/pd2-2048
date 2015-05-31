@@ -9,7 +9,5 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.start();
     w.show();
-    w.win();
-    w.end();
     return a.exec();
 }

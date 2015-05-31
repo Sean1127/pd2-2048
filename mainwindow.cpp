@@ -18,7 +18,7 @@ int MainWindow::best = 0;
 
 void MainWindow::ActionRight(int (&board)[4][4])
 {
-    if (end() == false && win() == false)
+    if (end(boardp) == false && win(boardp) == false)
     {
     // move every to the rightest
     int i, j;
@@ -70,17 +70,14 @@ void MainWindow::ActionRight(int (&board)[4][4])
             }
         }
     }
-
-    // create new number
-    int temp = pickRandPlace();
-    setboard(temp%4, temp/4, mergeRandNum());
+    createNewNum();
     setImage(boardp);
     }
 }
 
 void MainWindow::ActionLeft(int (&board)[4][4])
 {
-    if (end() == false && win() == false)
+    if (end(boardp) == false && win(boardp) == false)
     {
     // move every to the leftest
     int i, j;
@@ -133,16 +130,14 @@ void MainWindow::ActionLeft(int (&board)[4][4])
         }
     }
 
-    // create new number
-    int temp = pickRandPlace();
-    setboard(temp%4, temp/4, mergeRandNum());
+    createNewNum();
     setImage(boardp);
     }
 }
 
 void MainWindow::ActionDown(int (&board)[4][4])
 {
-    if (end() == false && win() == false)
+    if (end(boardp) == false && win(boardp) == false)
     {
     // move every to the bottom
     int i, j;
@@ -195,16 +190,14 @@ void MainWindow::ActionDown(int (&board)[4][4])
         }
     }
 
-    // create new number
-    int temp = pickRandPlace();
-    setboard(temp%4, temp/4, mergeRandNum());
+    createNewNum();
     setImage(boardp);
     }
 }
 
 void MainWindow::ActionUp(int (&board)[4][4])
 {
-    if (end() == false && win() == false)
+    if (end(boardp) == false && win(boardp) == false)
     {
     // move every to the top
     int i, j;
@@ -257,17 +250,17 @@ void MainWindow::ActionUp(int (&board)[4][4])
         }
     }
 
-    // create new number
-    int temp = pickRandPlace();
-    setboard(temp%4, temp/4, mergeRandNum());
+    createNewNum();
     setImage(boardp);
     }
 }
 
 void MainWindow::start()
 {
-    // initial board to 0
+    // initial board and score to 0
     cleanboard();
+    score = 0;
+    ui->gameboard->setPixmap(QPixmap(QString::fromUtf8(":/board.png")));
 
     // create 2 items
     for (int n = 0; n < 2; n++)
@@ -278,7 +271,7 @@ void MainWindow::start()
     setImage(boardp);
 }
 
-bool MainWindow::end()
+bool MainWindow::end(QLabel *ptr[4][4])
 {
     // check if board is full
     for (int i = 0; i < 4; i++)
@@ -302,14 +295,8 @@ bool MainWindow::end()
             {
                 return false;
             }
-        }
-    }
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
             // horizontal check
-            if (board[i][j] == board[i][j + 1])
+            if (board[j][i] == board[j][i + 1])
             {
                 return false;
             }
@@ -317,10 +304,17 @@ bool MainWindow::end()
     }
     // defeated screen
     ui->gameboard->setPixmap(QPixmap(QString::fromUtf8(":/Game Over.jpg")));
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            ptr[i][j]->clear();
+        }
+    }
     return true;
 }
 
-bool MainWindow::win()
+bool MainWindow::win(QLabel *ptr[4][4])
 {
     // check 2048 reached
     for (int i = 0; i < 4; i++)
@@ -329,6 +323,14 @@ bool MainWindow::win()
         {
             if (board[i][j] == 2048)
             {
+                ui->gameboard->setPixmap(QPixmap(QString::fromUtf8(":/You-win.jpg")));
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        ptr[i][j]->clear();
+                    }
+                }
                 return true;
             }
         }
@@ -448,6 +450,28 @@ bool MainWindow::checkEmpty(int x, int y)
     else
     {
         return false;
+    }
+}
+
+void MainWindow::createNewNum()
+{
+    bool space = false;
+    int i, j;
+    for (i = 0; i < 4; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            if (checkEmpty(i,j) == true)
+            {
+                space = true;
+                break;
+            }
+        }
+    }
+    if (space == true)
+    {
+        int temp = pickRandPlace();
+        setboard(temp%4, temp/4, mergeRandNum());
     }
 }
 
