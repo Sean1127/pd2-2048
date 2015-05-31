@@ -129,7 +129,6 @@ void MainWindow::ActionLeft(int (&board)[4][4])
             }
         }
     }
-
     createNewNum();
     setImage(boardp);
     }
@@ -189,7 +188,6 @@ void MainWindow::ActionDown(int (&board)[4][4])
             }
         }
     }
-
     createNewNum();
     setImage(boardp);
     }
@@ -249,7 +247,6 @@ void MainWindow::ActionUp(int (&board)[4][4])
             }
         }
     }
-
     createNewNum();
     setImage(boardp);
     }
@@ -358,9 +355,9 @@ void MainWindow::setboard(int x, int y, int num)
 
 int MainWindow::mergeRandNum()
 {
-    // generate number 2 and 4, ratio 7:1
+    // generate number 2 and 4, ratio 15:1
     srand(time(NULL));
-    if (rand()%8 == 1)
+    if (rand()%16 == 1)
     {
         return 4;
     }
