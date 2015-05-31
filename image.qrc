@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>board.png</file>
+        <file>Diamond.png</file>
+        <file>Diamond_Sword.png</file>
+        <file>Gold_Ingot.png</file>
+        <file>Golden_Sword.png</file>
+        <file>Iron_Ingot.png</file>
+        <file>Iron_Sword.png</file>
+        <file>Stick.png</file>
+        <file>Stone_Sword.png</file>
+        <file>Wood_Planks.png</file>
+        <file>Wooden_Sword.png</file>
+        <file>Cobblestone.png</file>
+        <file>Dirt.png</file>
+        <file>titleV.2.gif</file>
+        <file>desV.3.gif</file>
+        <file>Game Over.jpg</file>
+        <file>You-Win.jpg</file>
+    </qresource>
+</RCC>
