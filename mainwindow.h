@@ -27,7 +27,7 @@ public:
     int mergeRandNum();
     int pickRandPlace();
     void setImage(QLabel *ptr[4][4]);
-    bool checkEmpty(int a);
+    bool checkEmpty(int x, int y);
     void setboardp(QLabel *A1, QLabel *A2, QLabel *A3, QLabel *A4, QLabel *B1, QLabel *B2, QLabel *B3, QLabel *B4, QLabel *C1, QLabel *C2, QLabel *C3, QLabel *C4, QLabel *D1, QLabel *D2, QLabel *D3, QLabel *D4);
 
     // player functions

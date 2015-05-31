@@ -14,10 +14,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <widget class="QLabel" name="gameboard">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>390</x>
       <y>50</y>
       <width>501</width>
       <height>501</height>
@@ -33,34 +36,40 @@
    <widget class="QLabel" name="title">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>100</x>
       <y>60</y>
-      <width>141</width>
+      <width>181</width>
       <height>81</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:48pt;&quot;&gt;2048&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="image.qrc">:/titleV.2.gif</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="line">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>170</y>
-      <width>301</width>
+      <x>0</x>
+      <y>140</y>
+      <width>371</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Join the number and get to the &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;2048 &lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;tile!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>:/desV2.gif</pixmap>
     </property>
    </widget>
    <widget class="QPushButton" name="restart">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>240</y>
+      <x>120</x>
+      <y>260</y>
       <width>131</width>
       <height>41</height>
      </rect>
@@ -74,33 +83,10 @@
      <string>New Game</string>
     </property>
    </widget>
-   <widget class="QSplitter" name="splitter">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>350</y>
-      <width>151</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <widget class="QLabel" name="score">
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;SCORE&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="best">
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;BEST&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QLabel" name="A1">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>410</x>
       <y>70</y>
       <width>100</width>
       <height>100</height>
@@ -113,7 +99,7 @@
    <widget class="QLabel" name="A2">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>530</x>
       <y>70</y>
       <width>100</width>
       <height>100</height>
@@ -126,7 +112,7 @@
    <widget class="QLabel" name="B4">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>770</x>
       <y>190</y>
       <width>100</width>
       <height>100</height>
@@ -139,7 +125,7 @@
    <widget class="QLabel" name="B1">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>410</x>
       <y>190</y>
       <width>100</width>
       <height>100</height>
@@ -152,7 +138,7 @@
    <widget class="QLabel" name="B2">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>530</x>
       <y>190</y>
       <width>100</width>
       <height>100</height>
@@ -165,7 +151,7 @@
    <widget class="QLabel" name="B3">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>650</x>
       <y>190</y>
       <width>100</width>
       <height>100</height>
@@ -178,7 +164,7 @@
    <widget class="QLabel" name="A4">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>770</x>
       <y>70</y>
       <width>100</width>
       <height>100</height>
@@ -191,7 +177,7 @@
    <widget class="QLabel" name="A3">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>650</x>
       <y>70</y>
       <width>100</width>
       <height>100</height>
@@ -204,7 +190,7 @@
    <widget class="QLabel" name="C3">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>650</x>
       <y>310</y>
       <width>100</width>
       <height>100</height>
@@ -217,7 +203,7 @@
    <widget class="QLabel" name="C2">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>530</x>
       <y>310</y>
       <width>100</width>
       <height>100</height>
@@ -230,7 +216,7 @@
    <widget class="QLabel" name="C1">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>410</x>
       <y>310</y>
       <width>100</width>
       <height>100</height>
@@ -243,7 +229,7 @@
    <widget class="QLabel" name="D1">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>410</x>
       <y>430</y>
       <width>100</width>
       <height>100</height>
@@ -256,7 +242,7 @@
    <widget class="QLabel" name="C4">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>770</x>
       <y>310</y>
       <width>100</width>
       <height>100</height>
@@ -269,7 +255,7 @@
    <widget class="QLabel" name="D2">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>530</x>
       <y>430</y>
       <width>100</width>
       <height>100</height>
@@ -282,7 +268,7 @@
    <widget class="QLabel" name="D3">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>650</x>
       <y>430</y>
       <width>100</width>
       <height>100</height>
@@ -295,7 +281,7 @@
    <widget class="QLabel" name="D4">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>770</x>
       <y>430</y>
       <width>100</width>
       <height>100</height>
@@ -303,6 +289,48 @@
     </property>
     <property name="text">
      <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="score">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>370</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;SCORE&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="best">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>370</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;BEST&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="description">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>180</y>
+      <width>381</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="image.qrc">:/desV.3.gif</pixmap>
     </property>
    </widget>
   </widget>

@@ -6,6 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QPixmap bgp(":/Dirt.png");
+    bgp = bgp.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, bgp);
+    this->setPalette(palette);
     setboardp(ui->A1,ui->A2,ui->A3,ui->A4,ui->B1,ui->B2,ui->B3,ui->B4,ui->C1,ui->C2,ui->C3,ui->C4,ui->D1,ui->D2,ui->D3,ui->D4);
 }
 
@@ -27,8 +32,10 @@ int MainWindow::ActionUp(int (&board)[4][4])
 
 void MainWindow::start()
 {
-    // initial step
+    // initial board to 0
     cleanboard();
+
+    // create 2 items
     for (int n = 0; n < 2; n++)
     {
         int i = pickRandPlace();
@@ -43,10 +50,19 @@ void MainWindow::start()
 bool MainWindow::end()
 {
     // check if board is full
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if (checkEmpty(i,j) == true)
+            {
+                return false;
+            }
+        }
+    }
+
     // check if no more move
-    // pop dialog
-    // return
-    return false;
+    return true;
 }
 
 void MainWindow::cleanboard()
@@ -85,7 +101,9 @@ int MainWindow::pickRandPlace()
     // choose from 16
     srand(time(NULL));
     int temp = rand()%16;
-    while (checkEmpty(temp) == false)
+    int x = temp%4;
+    int y = temp/4;
+    while (checkEmpty(x, y) == false)
     {
         temp = rand()%16;
     }
@@ -132,15 +150,16 @@ void MainWindow::setImage(QLabel *ptr[4][4])
             case 2048:
                 ptr[i][j]->setPixmap(QPixmap(QString::fromUtf8(":/Diamond_Sword.png")));
                 break;
+            case 0:
+                ptr[i][j]->clear();
+                break;
             }
         }
     }
 }
 
-bool MainWindow::checkEmpty(int a)
+bool MainWindow::checkEmpty(int x, int y)
 {
-    int x = a%4;
-    int y = a/4;
     if (board[x][y] == 0)
     {
         return true;

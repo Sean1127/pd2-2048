@@ -12,5 +12,8 @@
         <file>Wood_Planks.png</file>
         <file>Wooden_Sword.png</file>
         <file>Cobblestone.png</file>
+        <file>Dirt.png</file>
+        <file>titleV.2.gif</file>
+        <file>desV.3.gif</file>
     </qresource>
 </RCC>
